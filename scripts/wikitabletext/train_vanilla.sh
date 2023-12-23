@@ -14,8 +14,8 @@ size="base"
 
 # train
 mkdir -p ${SAVE_PATH}
-python custom_train.py --num-workers 16 ${DATA_PATH}/bins \
-    --seed $seed \
+CUDA_VISIBLE_DEVICES=2 python custom_train.py --num-workers 16 ${DATA_PATH}/bins \
+    --seed $seed --save-dir ${SAVE_PATH} \
     --keep-best-checkpoints 3 --save-interval $INTERVAL --validate-interval $INTERVAL \
     --restore-file ${BART_PATH}/model.pt \
     --max-tokens $MAX_TOKENS \
