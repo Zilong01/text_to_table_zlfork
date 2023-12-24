@@ -81,7 +81,13 @@ def calc_similarity_matrix(tgt_data, pred_data, metric):
         elif metric == 'BS-scaled':
             global bert_scorer
             if bert_scorer is None:
-                bert_scorer = bert_score.BERTScorer(lang="en", rescale_with_baseline=True)
+                # 设置模型路径为本地路径
+                model_type_local = "/workspace/wzl/datamining/text_to_table/wzl/roberta-large/"
+                baseline_tsv_path = "/home/wangzilong/anaconda3/envs/py38_dm/lib/python3.8/site-packages/bert_score/rescale_baseline/en/roberta-large.tsv"
+
+                bert_scorer = bert_score.BERTScorer(model_type=model_type_local, num_layers=8, lang="en", rescale_with_baseline=True, baseline_path=baseline_tsv_path)
+
+                # bert_scorer = bert_score.BERTScorer(lang="en", rescale_with_baseline=True) # 这里无法下载模型，导致出错
             ret = bert_scorer.score([pred, ], [tgt, ])[2].item()
             ret = max(ret, 0)
             ret = min(ret, 1)
