@@ -21,6 +21,8 @@ def average_checkpoints(inputs):
       A dict of string keys mapping to various values. The 'model' key
       from the returned dict should correspond to an OrderedDict mapping
       string parameter names to torch Tensors.
+
+    接收一个字符串路径的迭代器作为输入，加载检查点文件并返回一个包含平均权重的模型字典。该函数会遍历输入的每个检查点文件，将各个参数的权重值相加并取平均，最后返回一个包含平均权重的模型字典。
     """
     params_dict = collections.OrderedDict()
     params_keys = None
@@ -72,6 +74,9 @@ def average_checkpoints(inputs):
 
 
 def last_n_checkpoints(paths, n, update_based, upper_bound=None):
+    '''
+    根据指定的路径和参数，返回最近的n个检查点文件列表。paths是一个包含路径的列表，n是要获取的检查点文件数量，update_based指定是否基于更新步骤进行排序，upper_bound可选地指定上限。
+    '''
     assert len(paths) == 1
     path = paths[0]
     if update_based:
@@ -95,15 +100,18 @@ def last_n_checkpoints(paths, n, update_based, upper_bound=None):
 
 
 def main():
+    '''
+    解析命令行参数并执行主要的逻辑。它解析输入的参数路径、输出路径和其他选项，根据需要调用last_n_checkpoints函数选择要平均的检查点文件，然后调用average_checkpoints函数计算平均权重，并将结果保存到输出文件中。
+    '''
     parser = argparse.ArgumentParser(
         description="Tool to average the params of input checkpoints to "
         "produce a new checkpoint",
     )
     # fmt: off
     parser.add_argument('--inputs', required=True, nargs='+',
-                        help='Input checkpoint file paths.')
+                        help='Input checkpoint file paths.') # 输入检查点路径
     parser.add_argument('--output', required=True, metavar='FILE',
-                        help='Write the new checkpoint containing the averaged weights to this path.')
+                        help='Write the new checkpoint containing the averaged weights to this path.') # 输出的平均权重路径
     num_group = parser.add_mutually_exclusive_group()
     num_group.add_argument('--num-epoch-checkpoints', type=int,
                            help='if set, will try to find checkpoints with names checkpoint_xx.pt in the path specified by input, '
