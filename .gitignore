@@ -1,3 +1,6 @@
 .idea/
 __pycache__/
 checkpoints/
+*.tar.gz
+bart.base
+data/
