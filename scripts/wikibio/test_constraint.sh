@@ -7,7 +7,7 @@ fairseq-interactive ${DATA_PATH}/bins --path $ckpt --beam 5 --remove-bpe --buffe
 bash scripts/eval/convert_fairseq_output_to_text.sh $ckpt.test_constrained.out
 
 printf "Wrong format:\n"
-python scripts/eval/calc_data_wrong_format_ratio.py $ckpt.test_constrained.out.text ${DATA_PATH}/test.data --row-header
+CUDA_VISIBLE_DEVICES=3 python scripts/eval/calc_data_wrong_format_ratio.py $ckpt.test_constrained.out.text ${DATA_PATH}/test.data --row-header
 for metric in E c BS-scaled; do
   printf "$metric metric:\n"
   python scripts/eval/calc_data_f_score.py $ckpt.test_constrained.out.text ${DATA_PATH}/test.data --row-header --metric $metric
