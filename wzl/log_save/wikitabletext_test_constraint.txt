@@ -1,0 +1,32 @@
+(py38_dm) wangzilong@85b1e59f837f:/workspace/wzl/datamining/text_to_table$ bash scripts/wikitabletext/test_constraint.sh data/wikitabletext/ checkpoints/wikitabletext/had/checkpoint_average_best-3.pt
+Wrong format:
+Args Namespace(col_header=False, hyp='checkpoints/wikitabletext/had/checkpoint_average_best-3.pt.test_constrained.out.text', row_header=True, table_name=None, tgt='data/wikitabletext//test.data')
+Wrong format: 0 / 2000 (0.00%)
+E metric:
+Args Namespace(col_header=False, hyp='checkpoints/wikitabletext/had/checkpoint_average_best-3.pt.test_constrained.out.text', metric='E', row_header=True, table_name=None, tgt='data/wikitabletext//test.data')
+  0%|                                                                                           | 0/2000 [00:00<?, ?it/s]scripts/eval/calc_data_f_score.py:100: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  return np.array([[calc_data_similarity(tgt, pred) for pred in pred_data] for tgt in tgt_data], dtype=np.float)
+100%|██████████████████████████████████████████████████████████████████████████████| 2000/2000 [00:00<00:00, 3816.34it/s]
+Row header: precision = 79.46; recall = 78.58; f1 = 78.54
+Non-header cell: precision = 60.45; recall = 60.07; f1 = 59.94
+c metric:
+Args Namespace(col_header=False, hyp='checkpoints/wikitabletext/had/checkpoint_average_best-3.pt.test_constrained.out.text', metric='c', row_header=True, table_name=None, tgt='data/wikitabletext//test.data')
+  0%|                                                                                           | 0/2000 [00:00<?, ?it/s]scripts/eval/calc_data_f_score.py:100: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  return np.array([[calc_data_similarity(tgt, pred) for pred in pred_data] for tgt in tgt_data], dtype=np.float)
+100%|███████████████████████████████████████████████████████████████████████████████| 2000/2000 [00:06<00:00, 306.79it/s]
+Row header: precision = 85.07; recall = 84.35; f1 = 84.31
+Non-header cell: precision = 70.29; recall = 69.68; f1 = 69.63
+BS-scaled metric:
+Args Namespace(col_header=False, hyp='checkpoints/wikitabletext/had/checkpoint_average_best-3.pt.test_constrained.out.text', metric='BS-scaled', row_header=True, table_name=None, tgt='data/wikitabletext//test.data')
+  0%|                                                                                           | 0/2000 [00:00<?, ?it/s]/home/wangzilong/anaconda3/envs/py38_dm/lib/python3.8/site-packages/transformers/tokenization_utils_base.py:1319: FutureWarning: The `max_len` attribute has been deprecated and will be removed in a future version, use `model_max_length` instead.
+  warnings.warn(
+/home/wangzilong/anaconda3/envs/py38_dm/lib/python3.8/site-packages/transformers/tokenization_utils_base.py:1319: FutureWarning: The `max_len` attribute has been deprecated and will be removed in a future version, use `model_max_length` instead.
+  warnings.warn(
+scripts/eval/calc_data_f_score.py:100: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  return np.array([[calc_data_similarity(tgt, pred) for pred in pred_data] for tgt in tgt_data], dtype=np.float)
+100%|████████████████████████████████████████████████████████████████████████████████| 2000/2000 [08:37<00:00,  3.86it/s]
+Row header: precision = 95.76; recall = 94.90; f1 = 95.10
+Non-header cell: precision = 82.03; recall = 81.49; f1 = 81.42
