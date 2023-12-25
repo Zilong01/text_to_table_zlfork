@@ -4,3 +4,4 @@ checkpoints/
 *.tar.gz
 bart.base
 data/
+roberta-large
