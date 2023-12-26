@@ -3,6 +3,7 @@ ckpt=${2:-"checkpoints/checkpoint_average_best-3.pt"}
 
 export PYTHONPATH=.
 
+printf "convert fairseq:\n"
 fairseq-interactive ${DATA_PATH}/bins --path $ckpt --beam 10 --remove-bpe --buffer-size 1024 --max-tokens 4096 --user-dir src/ --task text_to_table_task  --table-max-columns 2 --unconstrained-decoding > $ckpt.test_vanilla.out < ${DATA_PATH}/test.bpe.text
 bash scripts/eval/convert_fairseq_output_to_text.sh $ckpt.test_vanilla.out
 
