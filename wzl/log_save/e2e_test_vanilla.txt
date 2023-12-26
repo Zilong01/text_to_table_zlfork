@@ -1,0 +1,32 @@
+(py38_dm) wangzilong@85b1e59f837f:/workspace/wzl/datamining/text_to_table$ bash scripts/e2e/test_vanilla.sh data/e2e/ checkpoints/e2e/vanilla/checkpoint_average_best-3.pt
+Wrong format:
+Args Namespace(col_header=False, hyp='checkpoints/e2e/vanilla/checkpoint_average_best-3.pt.test_vanilla.out.text', row_header=True, table_name=None, tgt='data/e2e//test.data')
+Wrong format: 0 / 4693 (0.00%)
+E metric:
+Args Namespace(col_header=False, hyp='checkpoints/e2e/vanilla/checkpoint_average_best-3.pt.test_vanilla.out.text', metric='E', row_header=True, table_name=None, tgt='data/e2e//test.data')
+  0%|                                                                                              | 0/4693 [00:00<?, ?it/s]scripts/eval/calc_data_f_score.py:100: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  return np.array([[calc_data_similarity(tgt, pred) for pred in pred_data] for tgt in tgt_data], dtype=np.float)
+100%|█████████████████████████████████████████████████████████████████████████████████| 4693/4693 [00:01<00:00, 3058.12it/s]
+Row header: precision = 99.71; recall = 99.68; f1 = 99.65
+Non-header cell: precision = 97.97; recall = 97.94; f1 = 97.91
+c metric:
+Args Namespace(col_header=False, hyp='checkpoints/e2e/vanilla/checkpoint_average_best-3.pt.test_vanilla.out.text', metric='c', row_header=True, table_name=None, tgt='data/e2e//test.data')
+  0%|                                                                                              | 0/4693 [00:00<?, ?it/s]scripts/eval/calc_data_f_score.py:100: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  return np.array([[calc_data_similarity(tgt, pred) for pred in pred_data] for tgt in tgt_data], dtype=np.float)
+100%|█████████████████████████████████████████████████████████████████████████████████| 4693/4693 [00:01<00:00, 2895.48it/s]
+Row header: precision = 99.76; recall = 99.72; f1 = 99.71
+Non-header cell: precision = 98.09; recall = 98.06; f1 = 98.03
+BS-scaled metric:
+Args Namespace(col_header=False, hyp='checkpoints/e2e/vanilla/checkpoint_average_best-3.pt.test_vanilla.out.text', metric='BS-scaled', row_header=True, table_name=None, tgt='data/e2e//test.data')
+  0%|                                                                                              | 0/4693 [00:00<?, ?it/s]/home/wangzilong/anaconda3/envs/py38_dm/lib/python3.8/site-packages/transformers/tokenization_utils_base.py:1319: FutureWarning: The `max_len` attribute has been deprecated and will be removed in a future version, use `model_max_length` instead.
+  warnings.warn(
+/home/wangzilong/anaconda3/envs/py38_dm/lib/python3.8/site-packages/transformers/tokenization_utils_base.py:1319: FutureWarning: The `max_len` attribute has been deprecated and will be removed in a future version, use `model_max_length` instead.
+  warnings.warn(
+scripts/eval/calc_data_f_score.py:100: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  return np.array([[calc_data_similarity(tgt, pred) for pred in pred_data] for tgt in tgt_data], dtype=np.float)
+100%|██████████████████████████████████████████████████████████████████████████████████| 4693/4693 [00:35<00:00, 132.89it/s]
+Row header: precision = 99.91; recall = 99.87; f1 = 99.89
+Non-header cell: precision = 98.71; recall = 98.63; f1 = 98.64
