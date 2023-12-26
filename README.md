@@ -1,6 +1,8 @@
 **Update 01/12/2023**: for BERTScore evaluation, using `transformers>4.17.0` will lead to different results as in the paper. If you have difficulty replicating the BERTScore results, please try downgrading to `transformers<4.17.0`. In my experiments I used `transformers==3.1.0`. For details please refer to https://github.com/shirley-wu/text_to_table/issues/7
 
 **Update 12/23/2023**: 更新代码在全部数据集，全部操作下的执行脚本命令。
+这是一个fork仓库，原仓库地址：https://github.com/shirley-wu/text_to_table
+
 ---
 
 ## Introduction
@@ -36,6 +38,7 @@ For each dataset, use `scripts/dataset-name/train_vanilla.sh` to train a vanilla
 ```
 
 下面两个数据集在单个gpu上运行
+
 wzl-e2e
 ```bash
 bash scripts/e2e/train_vanilla.sh data/e2e/ bart.base/ checkpoints/e2e/
