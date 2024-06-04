@@ -114,11 +114,11 @@ def main():
                         help='Write the new checkpoint containing the averaged weights to this path.') # 输出的平均权重路径
     num_group = parser.add_mutually_exclusive_group()
     num_group.add_argument('--num-epoch-checkpoints', type=int,
-                           help='if set, will try to find checkpoints with names checkpoint_xx.pt in the path specified by input, '
-                           'and average last this many of them.')
+                        help='if set, will try to find checkpoints with names checkpoint_xx.pt in the path specified by input, '
+                        'and average last this many of them.')
     num_group.add_argument('--num-update-checkpoints', type=int,
-                           help='if set, will try to find checkpoints with names checkpoint_ee_xx.pt in the path specified by input, '
-                           'and average last this many of them.')
+                        help='if set, will try to find checkpoints with names checkpoint_ee_xx.pt in the path specified by input, '
+                        'and average last this many of them.')
     parser.add_argument('--checkpoint-upper-bound', type=int,
                         help='when using --num-epoch-checkpoints, this will set an upper bound on which epoch to use, '
                         'when using --num-update-checkpoints, this will set an upper bound on which update to use'

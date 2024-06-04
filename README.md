@@ -114,6 +114,9 @@ bash scripts/rotowire/test_vanilla.sh data/rotowire/ checkpoints/rotowire/vanill
 wzl-wikibio
 ```bash
 bash scripts/wikibio/test_constraint.sh data/wikibio/ checkpoints/wikibio/had/checkpoint_average_best-3.pt
+# debug模式
+bash scripts/wikibio/test_constraint_debug.sh data/wikibio/ checkpoints/wikibio/had/checkpoint_average_best-3.pt
+
 bash scripts/wikibio/test_vanilla.sh data/wikibio/ checkpoints/wikibio/vanilla/checkpoint_average_best-3.pt
 ```
 

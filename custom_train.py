@@ -39,17 +39,19 @@ logging.basicConfig(
 )
 logger = logging.getLogger("fairseq_cli.train")
 
-
+# 该类主要用于在训练过程中保存模型的检查点
 class Saver:
     def __init__(self):
         self.best = None
         self.keep_best = []
 
+    # 该方法在每个训练周期结束时被调用，以保存模型的当前状态
     def save_checkpoint(self, args, trainer, epoch_itr, val_loss):
         # only one worker should attempt to create the required dir
         if args.distributed_rank == 0:
             os.makedirs(args.save_dir, exist_ok=True)
 
+        # 首先，它会检查是否需要保存检查点。这是通过比较当前的验证损失和最佳验证损失来决定的。如果当前的验证损失比最佳验证损失更好（即更低或更高，取决于我们是在最小化还是最大化某个指标），那么就会更新最佳验证损失，并决定保存检查点。
         prev_best = val_loss if self.best is None else self.best
         if val_loss is not None:
             best_function = max if args.maximize_best_checkpoint_metric else min
@@ -73,6 +75,7 @@ class Saver:
         end_of_epoch = epoch_itr.end_of_epoch()
         updates = trainer.get_num_updates()
 
+        # 然后，它会创建一个字典，其中包含了需要保存的检查点的名称和条件。这些条件可能包括：是否是训练周期的结束、是否达到了保存间隔、是否是最佳检查点等。
         suffix = getattr(args, "checkpoint_suffix", "")
         checkpoint_conds = collections.OrderedDict()
         save_epoch_checkpoint = (
@@ -109,6 +112,9 @@ class Saver:
         checkpoints = [
             os.path.join(args.save_dir, fn) for fn, cond in checkpoint_conds.items() if cond
         ]
+
+        # 接下来，它会保存满足条件的检查点。这是通过调用trainer.save_checkpoint方法完成的，该方法会将模型的状态以及一些额外的信息（如当前的训练迭代器的状态和验证损失）保存到磁盘。
+
         if len(checkpoints) > 0:
             trainer.save_checkpoint(checkpoints[0], extra_state)
             for cp in checkpoints[1:]:
@@ -121,6 +127,7 @@ class Saver:
                 )
             )
 
+        # 最后，它会删除旧的检查点，以确保只保留最近的和最佳的检查点。这是通过检查检查点的名称和保存的条件来完成的。
         if not end_of_epoch and args.keep_interval_updates > 0:
             # remove old checkpoints; checkpoints are sorted in descending order
             checkpoints = checkpoint_paths(
